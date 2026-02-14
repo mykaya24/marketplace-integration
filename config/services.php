@@ -35,4 +35,12 @@ return [
         ],
     ],
 
+    'hepsiburada'=>[
+                    'base_url' => env('HB_BASE_URL'),
+                    'agent' => env('HB_AGENT'),
+                    'service_key' => env('HB_SERVICE_KEY'),
+                    'password' => env('HB_PASSWORD'),
+                    'merchant_id' => env('HB_MERCHANTID'),
+    ],
+
 ];
