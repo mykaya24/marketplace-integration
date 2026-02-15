@@ -12,8 +12,7 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::get('/get/orders', function (Request $request) {
-    $orders = new OrderController(new OrderService(new HepsiburadaApiService));
-    $resource = new OrderResource();
-    return $resource->getResponse($orders->store());
+    $orderController = new OrderController(new OrderService(new HepsiburadaApiService),new OrderResource);
+    return $orderController->store();
 });
 

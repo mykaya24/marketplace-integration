@@ -9,9 +9,11 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    public function __construct(private OrderService $orderService)
+    public function __construct(private OrderService $orderService, private OrderResource $orderResource)
     {}
     public function store(){
-        return $this->orderService->getOrders();
+        $orders =  $this->orderService->getOrders();
+        //dd($orders);
+        return $this->orderResource->getResponse($orders);
     }
 }
