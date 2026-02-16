@@ -5,6 +5,7 @@ namespace App\DTO;
 class OrderDTO
 {
     public function __construct(
+        public readonly string $orderId,
         public readonly string $date,
         public readonly string $category,
         public readonly OrderShippingDTO $shipping,
@@ -22,6 +23,7 @@ class OrderDTO
     public static function fromArray($data): self
     {
         return new self(
+            $data["orderId"],
             $data["orderDate"],
             "Hepsiburada_Final Price",
              OrderShippingDTO::fromArray($data),
