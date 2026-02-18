@@ -21,6 +21,15 @@ class OrderService
             }
             $i++;
         } while ($orders["pageCount"] > $i);
+
+        $i = 0;
+        do {
+            $orders = $this->hepsiburadaService->getPackagedOrders($i * 10);
+            foreach ($orders["items"] as $ord) {
+                $orderList[] = OrderDTO::fromArray($ord);
+            }
+            $i++;
+        } while ($orders["pageCount"] > $i);
         return $orderList;
     }
 }
