@@ -23,4 +23,26 @@ class OrderShippingDTO
         );
 
     }
+    public static function fromArrayPackaged($data): self
+    {
+        return new self(
+            $data["recipientName"],
+            $data["shippingAddressDetail"],
+            $data["phoneNumber"],
+            $data["shippingCity"],
+            $data["shippingTown"]
+        );
+
+    }
+
+    public function toArray(): array
+    {
+        return [
+                'customer'=> $this->customer,
+                'adress'=> $this->adress,
+                'phone'=> $this->phone,
+                'city'=> $this->city,
+                'town'=> $this->town
+        ];
+    }
 }

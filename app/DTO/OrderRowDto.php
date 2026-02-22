@@ -9,4 +9,13 @@ class OrderRowDTO
         public readonly string $quantity,
         public readonly string $name
     ) {}
+
+    public function toArray(): array
+    {
+        return [
+                'sku'=> $this->sku,
+                'quantity'=> $this->quantity,
+                'name'=>$this->name
+        ];
+    }
 }

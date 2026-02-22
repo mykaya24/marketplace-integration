@@ -29,4 +29,33 @@ class OrderBillingDTO
         );
 
     }
+    public static function fromArrayPackaged($data): self
+    {
+        return new self(
+            $data["companyName"],    
+            $data["identityNo"],
+            $data["taxNumber"],
+            $data["taxOffice"],
+            $data["billingAddress"],
+            $data["phoneNumber"],
+            $data["billingCity"],
+            $data["billingTown"]
+        );
+
+    }
+
+    public function toArray(): array
+    {
+        return [
+                'customer'=> $this->customer,
+                'tc_no'=> $this->tcNo,
+                'tax_number'=>$this->taxNumber,
+                'tax_office'=>$this->taxOffice,
+                'adress'=> $this->adress,
+                'phone'=> $this->phone,
+                'city'=> $this->city,
+                'town'=> $this->town
+        ];
+    }
+    
 }
