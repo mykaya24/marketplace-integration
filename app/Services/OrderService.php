@@ -3,7 +3,9 @@
 namespace App\Services;
 
 use App\DTO\OrderDTO;
+use App\Events\OrderCreated;
 use App\Events\OrdersFetched;
+use App\Models\OrderIntegration;
 use App\Repositories\OrderProductRepository;
 use App\Repositories\OrderRepository;
 use Exception;
@@ -15,7 +17,11 @@ use function PHPSTORM_META\type;
 
 class OrderService
 {
-    public function __construct(private OrderRepository $orderRepository, private OrderProductRepository $orderProductRepository, private HepsiburadaApiService $hepsiburadaService) {}
+    public function __construct(
+                            private OrderRepository $orderRepository, 
+                            private OrderProductRepository $orderProductRepository, 
+                            private HepsiburadaApiService $hepsiburadaService,
+                            private SendExternalApiService $sendExternalApiService) {}
 
     public function getOrders()
     {
@@ -38,8 +44,6 @@ class OrderService
             }
             $i++;
         } while (count($orders)==10);
-        //return $orderList;
-        //event(new OrdersFetched($orderList));
         event(new OrdersFetched(
             array_map(fn($dto) => $dto->toArray(), $orderList)
         ));
@@ -58,9 +62,15 @@ class OrderService
                         return $item;
                     })->toArray();
                 
-                $this->orderProductRepository->upsert($products);    
+                $this->orderProductRepository->upsert($products); 
+                event(new OrderCreated($orderDb));   
             });
         }
         
+    }
+
+    public function sendOrderExternalApi(OrderIntegration $orderIntegration){
+        $api = $this->sendExternalApiService->sendOrder($orderIntegration);
+        // burda api den dönen response orderIntegration içerisine kaydedilecek
     }
 }

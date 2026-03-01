@@ -43,4 +43,9 @@ return [
                     'merchant_id' => env('HB_MERCHANTID'),
     ],
 
+    'externalApi' => [
+                    'erp'=> env('ERP_EXTERNAL_API'),
+                    'accounting'=> env('ACCOUNTING_EXTERNAL_API'),
+    ],
+
 ];

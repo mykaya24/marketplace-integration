@@ -36,6 +36,8 @@ return new class extends Migration
             $table->string("invoice_number");
             $table->float("commission_amount",2)->nullable();
             $table->float("commission_rate",2)->nullable();
+            $table->float("price",2)->nullable();
+            $table->integer("vat_rate")->nullable();
             $table->timestamp("created_at");
             $table->timestamp("updated_at");
         });

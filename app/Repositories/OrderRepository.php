@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Order;
+use App\Models\OrderProduct;
 
 class OrderRepository{
     
@@ -22,4 +23,10 @@ class OrderRepository{
             );
         return $orderModel;
     }
+
+    public function getById($id){
+        return Order::with("orderProducts")->find($id);
+    }
+
+    
 }

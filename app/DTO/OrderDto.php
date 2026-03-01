@@ -35,7 +35,7 @@ class OrderDTO
              $data["orderNumber"],
              $data["commission"]["amount"],
              $data["commissionRate"],
-            [new OrderRowDTO($data["sku"],$data["quantity"],$data["name"])]
+            [new OrderRowDTO($data["sku"],$data["quantity"],$data["name"],$data["totalPrice"]["amount"],$data["vatRate"])]
         );
 
     }
@@ -81,7 +81,7 @@ class OrderDTO
     {
         $return = [];
         foreach($data as $d){
-            $return[]  = new OrderRowDTO($d["hbSku"],$d["quantity"],$d["productName"]);
+            $return[]  = new OrderRowDTO($d["hbSku"],$d["quantity"],$d["productName"],$d["totalPrice"]["amount"],$d["vatRate"]);
         }
         return $return;
     }
